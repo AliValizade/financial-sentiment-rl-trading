@@ -1,558 +1,202 @@
-# Master's Thesis Project Instructions
+# Project Guidelines
 
 ## 1. Project Identity
 
-This project is for completing a Master's thesis in Computer Engineering / Artificial Intelligence and Robotics.
+**Project:** Master's Thesis in Computer Engineering / Artificial Intelligence and Robotics
 
-The thesis supervisor is Dr. Reza Shamsaee.
+**Working Title:**
+Enhancing Sentiment-Based Trading Decisions Using Reinforcement Learning
 
-The selected base paper is:
+**Persian Title:**
+بهبود تصمیم‌گیری معاملاتی مبتنی بر تحلیل احساسات مالی با استفاده از یادگیری تقویتی
 
-**Financial sentiment analysis meets algorithmic trading: a performance-based approach**
-
-Authors: Alberto Burchi and Leonardo Regni
-Journal: Cogent Economics & Finance
-Year: 2026
-DOI: 10.1080/23322039.2026.2703376
-
-Official paper:
-https://www.tandfonline.com/doi/full/10.1080/23322039.2026.2703376
-
-Official GitHub repository:
-https://github.com/AlbertoBurchi/fsa_x
-
-This paper is the primary scientific and technical reference for the thesis unless the supervisor explicitly changes the direction.
+**Supervisor:**
+Dr. Reza Shamsaee
 
 ---
 
-# 2. Main Thesis Direction
+## 2. Research Direction
 
-The thesis focuses on:
+The thesis focuses on the intersection of:
 
 * Financial Sentiment Analysis
-* Financial social-media/text data
-* Transformer-based sentiment models
-* Algorithmic trading
-* Data-driven trading decisions
-* Reinforcement Learning as the preferred development direction
+* Algorithmic Trading
+* Reinforcement Learning
 
-The base paper evaluates:
-
-**Tweets → Sentiment Models → Daily Sentiment → Trading Signal → Portfolio/Backtest**
-
-The intended thesis extension is:
-
-**Tweets → Financial Sentiment → Sentiment + Market Features → RL Agent → Trading Policy → Portfolio/Backtest**
-
-The thesis should NOT be framed merely as stock-price prediction.
-
-The main research focus is the improvement of the **trading decision layer** using Reinforcement Learning.
-
-The exact RL algorithm must not be fixed prematurely. DQN is an initial candidate because the trading action space can naturally be represented as discrete actions such as BUY / HOLD / SELL, but the final algorithm must be selected after technical analysis of the base paper, environment design, state/action space, reward function, and computational constraints.
+The primary research focus is the **trading decision layer**, rather than stock-price prediction or sentiment classification.
 
 ---
 
-# 3. Core Working Principles
+## 3. Selected Base Paper
 
-Throughout the project:
+The thesis is based on:
 
-1. Prioritize scientific correctness over speed.
-2. Prioritize reproducibility.
-3. Never invent experimental results.
-4. Never claim an improvement before experimentally demonstrating it.
-5. Clearly distinguish:
+> Burchi, A., & Regni, L. (2026).
+> Financial sentiment analysis meets algorithmic trading: a performance-based approach.
+> Cogent Economics & Finance.
+> DOI: 10.1080/23322039.2026.2703376
 
-   * facts from the base paper,
-   * our interpretation,
-   * proposed thesis modifications,
-   * experimentally verified results.
-6. Do not introduce unnecessary technologies or models.
-7. Prefer the smallest technically sound solution that can produce a defensible thesis.
-8. Avoid scope creep.
-9. Every major technical decision must have a reason.
-10. Every experiment must be reproducible.
-11. Preserve the original paper's methodology when reproducing its baseline.
-12. Do not modify the baseline in a way that makes comparison with the paper impossible.
-13. When extending the paper, clearly separate the original method from the proposed method.
-14. Always consider data leakage and look-ahead bias in financial experiments.
-15. Never use future information when constructing a state, feature, signal, or reward.
-16. Financial performance must be evaluated with appropriate risk-aware metrics, not only accuracy or F1.
-17. Keep the thesis scope realistic for the available time and computing resources.
-18. When uncertain about a scientific or methodological claim, verify it using the original paper or authoritative sources.
+Official paper:
+
+https://doi.org/10.1080/23322039.2026.2703376
+
+Official repository:
+
+https://github.com/AlbertoBurchi/fsa_x
+
+The selected paper is the fixed base paper for this thesis unless a serious scientific or reproducibility problem is identified or the supervisor requests a change.
 
 ---
 
-# 4. Phase 0 — Thesis Definition
+## 4. Base Paper Concept
 
-Before implementation, establish:
+The base paper follows the general pipeline:
 
-* Final thesis title
-* Problem statement
-* Motivation
-* Research gap
-* Main research question
-* Sub-research questions
-* Objectives
-* Contributions
-* Scope
-* Assumptions
-* Dataset
-* Base models
-* Baseline trading strategy
-* Proposed RL approach
-* Evaluation methodology
+```text
+Tweets
+   ↓
+Sentiment Models
+   ↓
+Daily Sentiment
+   ↓
+Trading Signal
+   ↓
+Portfolio / Backtest
+```
 
-The initial working title is:
-
-**Enhancing Sentiment-Based Trading Decisions Using Reinforcement Learning**
-
-Persian working title:
-
-**بهبود تصمیم‌گیری معاملاتی مبتنی بر تحلیل احساسات مالی با استفاده از یادگیری تقویتی**
-
-The title may be refined after the technical design is finalized.
-
-Do not unnecessarily lock the title to a specific RL algorithm such as DQN until the experimental design is complete.
-
----
-
-# 5. Phase 1 — Deep Study of the Base Paper
-
-Read the paper completely and systematically.
-
-Extract:
-
-### Problem
-
-* What problem does the paper solve?
-* Why is the problem important?
-* What gap does it address?
-
-### Data
-
-* Data source
-* Dataset structure
-* Date range
-* Number of stocks
-* Number of tweets
-* Price data
-* Features
-* Preprocessing
-* Missing values
-* Filtering rules
-
-### Sentiment Models
-
-Study:
+The sentiment models investigated in the base paper include:
 
 * BERTweet
 * RoBERTa
 * FinBERT
 
-Understand:
+The thesis investigates an extension in which the trading decision layer is learned using reinforcement learning:
 
-* model architecture at the required level,
-* pretrained model,
-* input format,
-* sentiment labels,
-* output probabilities,
-* aggregation method.
-
-### Trading Layer
-
-Understand exactly how sentiment is converted into:
-
-* daily sentiment,
-* buy signal,
-* sell signal,
-* long-only position,
-* long-short position.
-
-### Backtesting
-
-Extract:
-
-* execution timing,
-* entry/exit rules,
-* transaction costs,
-* portfolio construction,
-* benchmark,
-* evaluation period,
-* performance metrics.
-
-### Reproducibility
-
-Inspect the official GitHub repository file-by-file.
-
-Do not immediately rewrite the code.
-
-First understand:
-
-* project structure,
-* notebooks,
-* data files,
-* preprocessing,
-* sentiment inference,
-* portfolio construction,
-* backtesting,
-* output files,
-* dependencies.
-
-Produce a technical map of the repository before modifying it.
+```text
+Tweets
+   ↓
+Sentiment Models
+   ↓
+Daily Sentiment
+   +
+Market / Technical Features
+   ↓
+RL State
+   ↓
+RL Agent
+   ↓
+Trading Policy
+   ↓
+Portfolio / Backtest
+```
 
 ---
 
-# 6. Phase 2 — Environment and Repository Reproduction
+## 5. Core Research Principle
 
-Create a clean thesis development environment.
+The thesis should clearly separate:
 
-Record:
+1. **Baseline reproduction**
+2. **Proposed methodological extension**
+3. **Experimental comparison**
 
-* Python version
-* OS
-* package versions
-* GPU/CPU availability
-* CUDA version if applicable
-* required libraries
-
-Create a separate thesis repository rather than modifying the original research repository destructively.
-
-Maintain clear separation between:
-
-* original/base implementation,
-* reproduced implementation,
-* thesis extension.
-
-Create reproducibility documentation.
-
-At this stage the goal is:
-
-**Run → reproduce → understand**
-
-not:
-
-**rewrite → improve**
+The original sentiment-analysis and rule-based trading framework should be reproduced as faithfully as practical before introducing the proposed RL-based decision layer.
 
 ---
 
-# 7. Phase 3 — Dataset Verification
+## 6. Proposed Research Direction
 
-Verify the exact datasets used by the paper.
+The proposed extension investigates whether a reinforcement-learning-based decision layer can learn a trading policy from a combination of:
 
-Document:
+* Financial sentiment information
+* Market information
+* Technical information
+* Portfolio state where justified
 
-* source
-* licensing/access conditions
-* date range
-* stock universe
-* tweet count
-* price data
-* columns
-* missing values
-* duplicates
-* timestamp format
-* timezone
-* stock identifiers
-
-Verify that the dataset used in experiments is consistent with the paper.
-
-If the original dataset cannot be reproduced exactly, document:
-
-* what is unavailable,
-* what alternative was used,
-* why,
-* what effect this may have on comparability.
-
-Never silently substitute datasets.
+The RL algorithm, state representation, reward formulation, and other implementation details are not considered final until they have been technically analyzed and experimentally justified.
 
 ---
 
-# 8. Phase 4 — Baseline Reproduction
+## 7. Candidate RL Formulation
 
-Reproduce the original pipeline before introducing RL.
+The trading problem will initially be formulated as a Markov Decision Process:
 
-The baseline must include, as far as practically possible:
+$$
+M = (S, A, P, R, \gamma)
+$$
 
-1. Data preprocessing
-2. Sentiment extraction
-3. Daily sentiment aggregation
-4. Trading signal generation
-5. Portfolio construction
-6. Backtesting
-7. Performance evaluation
+where:
 
-Reproduce the three sentiment models:
+* \(S\) represents the trading state
+* \(A\) represents the available trading actions
+* \(P\) represents state transitions
+* \(R\) represents the reward function
+* \(\gamma\) represents the discount factor
 
-* BERTweet
-* RoBERTa
-* FinBERT
+The initial action design is a discrete action space corresponding to:
 
-The main goal is to establish a reliable baseline.
+```text
+-1 → Short
+ 0 → Flat
++1 → Long
+```
 
-Compare reproduced results with the paper.
-
-Create a table:
-
-| Component    | Paper | Reproduction | Difference |
-| ------------ | ----- | ------------ | ---------- |
-| Dataset      |       |              |            |
-| BERTweet     |       |              |            |
-| RoBERTa      |       |              |            |
-| FinBERT      |       |              |            |
-| Long-only    |       |              |            |
-| Long-short   |       |              |            |
-| Sharpe       |       |              |            |
-| Max Drawdown |       |              |            |
-
-Differences must be investigated rather than hidden.
+The final action semantics remain subject to the environment design and experimental analysis.
 
 ---
 
-# 9. Phase 5 — Reproduce the Original Trading Strategy
+## 8. Candidate State Representation
 
-Implement the paper's rule-based strategy independently enough to serve as a baseline.
+The candidate state representation may combine:
 
-This is critical.
+```text
+Sentiment Features
++
+Market Features
++
+Technical Features
++
+Current Position
+```
 
-The thesis must be able to answer:
+Possible sentiment information includes aggregated sentiment probabilities and, where justified, tweet-volume information.
 
-**Does RL improve the trading decision compared with the original decision mechanism?**
+Possible market and technical information includes recent returns, volatility, volume-related features, and selected technical indicators.
 
-Therefore the original trading strategy becomes one of the principal baselines.
+The final feature set must be determined without introducing future information or look-ahead bias.
 
-At minimum compare:
+---
+
+## 9. Candidate Reward
+
+The initial reward candidate is based on economic portfolio performance after transaction costs.
+
+A risk-aware reward formulation may be investigated later if scientifically justified.
+
+Reward design must not be finalized before the trading environment and evaluation protocol are defined.
+
+---
+
+## 10. Planned Baselines
+
+The minimum planned comparison is:
 
 1. Buy & Hold
-2. Original sentiment-based rule
+2. Original sentiment-based trading rule
 3. RL without sentiment
-4. RL with sentiment
+4. RL with sentiment and market / technical features
 
-The fourth configuration is the primary proposed approach.
+The fourth configuration is the primary proposed configuration.
 
----
-
-# 10. Phase 6 — Research Gap and Thesis Contribution
-
-After baseline reproduction, formally define the gap.
-
-The base paper demonstrates that:
-
-**sentiment → predefined trading rules → portfolio performance**
-
-The thesis investigates:
-
-**sentiment + market information → learned trading policy → portfolio performance**
-
-The proposed contribution should therefore be formulated as an extension of the decision-making layer rather than claiming to invent financial sentiment analysis or RL trading.
-
-A safe contribution statement is:
-
-> The thesis extends the sentiment-based algorithmic trading framework of the selected base paper by replacing the predefined trading decision mechanism with a reinforcement-learning-based policy and evaluating whether the learned policy can improve risk-adjusted trading performance under controlled experimental conditions.
-
-Do not claim:
-
-* "the first study"
-* "the first use of RL for sentiment trading"
-* "a completely novel RL trading system"
-
-unless a systematic literature review actually establishes such claims.
+The experiments must distinguish the contribution of reinforcement learning from the contribution of sentiment information.
 
 ---
 
-# 11. Phase 7 — RL Problem Formulation
+## 11. Financial Evaluation
 
-Formulate trading as a Markov Decision Process.
+The trading strategies should be evaluated using multiple financial metrics rather than return alone.
 
-Define:
-
-### State
-
-Possible state components:
-
-* sentiment probabilities
-* aggregated daily sentiment
-* sentiment momentum/change
-* price return
-* volume
-* volatility
-* technical indicators
-* current position
-* cash/portfolio information
-
-Only features available at decision time may be included.
-
-### Action
-
-Initial candidate:
-
-* BUY
-* HOLD
-* SELL
-
-Alternative action spaces may be considered only if justified.
-
-### Reward
-
-Reward should represent economic performance.
-
-Possible formulation:
-
-**Reward = portfolio return − transaction cost − risk penalty**
-
-Potential risk terms:
-
-* volatility
-* drawdown
-* excessive turnover
-
-The reward function must be justified scientifically and experimentally.
-
-### Environment
-
-Define:
-
-* observation/state
-* action
-* transition
-* reward
-* episode
-* initial capital
-* transaction costs
-* position constraints
-* execution timing.
-
----
-
-# 12. Phase 8 — RL Algorithm Selection
-
-Initially investigate:
-
-### DQN
-
-Because it naturally supports discrete actions.
-
-Then evaluate whether another algorithm is more appropriate.
-
-Possible alternatives:
-
-* Double DQN
-* Dueling DQN
-* PPO
-
-Do not implement many RL algorithms merely for quantity.
-
-The default strategy is:
-
-**one strong primary RL method + one optional secondary method if time permits.**
-
-The selected algorithm must be justified by:
-
-* action-space structure,
-* state representation,
-* training stability,
-* computational feasibility,
-* literature support,
-* reproducibility.
-
----
-
-# 13. Phase 9 — Experimental Design
-
-The experiments should isolate the contribution of sentiment.
-
-Minimum experimental matrix:
-
-### Experiment A
-
-Buy & Hold
-
-### Experiment B
-
-Original paper's sentiment-based rule
-
-### Experiment C
-
-RL + market/technical features without sentiment
-
-### Experiment D
-
-RL + sentiment + market/technical features
-
-Experiment D is the primary proposed model.
-
-If feasible:
-
-### Experiment E
-
-RL + FinBERT sentiment
-
-### Experiment F
-
-RL + BERTweet sentiment
-
-### Experiment G
-
-RL + RoBERTa sentiment
-
-These additional experiments should only be performed if they materially contribute to the thesis.
-
----
-
-# 14. Phase 10 — Temporal Evaluation
-
-Financial experiments must use time-aware evaluation.
-
-Avoid random train/test splits for sequential market prediction/trading.
-
-Prefer:
-
-* chronological train/validation/test split,
-* walk-forward evaluation,
-* rolling-window evaluation where practical.
-
-Never allow information from the future test period to influence training, preprocessing, feature scaling, model selection, or hyperparameter tuning.
-
-Document every split explicitly.
-
----
-
-# 15. Phase 11 — Avoiding Data Leakage
-
-Before every experiment, explicitly inspect for:
-
-* look-ahead bias
-* future price leakage
-* timestamp leakage
-* sentiment aggregation leakage
-* normalization leakage
-* train/test contamination
-* duplicate tweets
-* future market information
-* same-day execution assumptions
-
-If sentiment at day t is used to make a trade, define exactly when that information becomes available and execute the trade no earlier than justified.
-
-The base paper already uses next-day execution to reduce look-ahead bias. Preserve this principle.
-
----
-
-# 16. Phase 12 — Evaluation Metrics
-
-Evaluate both machine-learning and financial performance.
-
-### Sentiment/model metrics
-
-Where applicable:
-
-* Accuracy
-* Precision
-* Recall
-* F1
-* Confusion Matrix
-
-### Trading metrics
-
-At minimum:
+Planned metrics include:
 
 * Cumulative Return
 * Annualized Return
@@ -564,463 +208,197 @@ At minimum:
 * Number of Trades
 * Turnover
 
-Where appropriate:
-
-* transaction costs
-* slippage
-* exposure
-* win rate
-
-Do not treat cumulative return alone as sufficient evidence.
-
-Risk-adjusted performance is particularly important.
+Transaction costs and, where appropriate, slippage should be incorporated into the evaluation.
 
 ---
 
-# 17. Phase 13 — Statistical and Robustness Analysis
+## 12. Temporal Evaluation and Leakage Prevention
 
-Where feasible:
+Financial experiments must use time-aware evaluation.
 
-* compare multiple stocks,
-* compare multiple periods,
-* compare multiple market conditions,
-* test different transaction costs,
-* test sensitivity to reward parameters,
-* test sensitivity to RL hyperparameters,
-* evaluate robustness across seeds.
+The planned approach is:
 
-Use statistical tests only when appropriate and justified.
+```text
+Chronological Training
+        ↓
+Validation
+        ↓
+Test
+```
 
-Do not overstate significance from a small sample.
+Walk-forward or rolling evaluation may be considered where practical.
 
----
+Future information must not be used in:
 
-# 18. Phase 14 — Ablation Studies
+* preprocessing
+* normalization
+* feature engineering
+* model selection
+* hyperparameter tuning
+* training
+* trading decisions
 
-The thesis should attempt to answer:
+Execution timing must be explicitly defined.
 
-**What actually causes the improvement?**
-
-Possible ablations:
-
-* RL without sentiment
-* RL with sentiment
-* sentiment only
-* technical features only
-* sentiment + technical features
-* different sentiment models
-* different reward formulations
-
-Ablation studies are preferable to adding many unrelated models.
+The baseline and proposed strategy should not use information that would not have been available at the time of the simulated decision.
 
 ---
 
-# 19. Phase 15 — Results Analysis
+## 13. Reproducibility Principles
 
-For every major experiment, report:
+The project should record, where applicable:
 
-1. Configuration
-2. Dataset
-3. Time period
-4. Features
-5. Model
-6. Hyperparameters
-7. Transaction costs
-8. Evaluation metrics
-9. Results
-10. Interpretation
-11. Limitations
+* Data sources
+* Dataset versions or retrieval information
+* Software and package versions
+* Random seeds
+* Model configurations
+* Hyperparameters
+* Transaction-cost assumptions
+* Experimental configurations
+* Evaluation procedures
 
-Never interpret a result beyond what the experiment supports.
-
-Example:
-
-Do not write:
-
-> RL is superior.
-
-Prefer:
-
-> Under the specified experimental conditions, the RL-based strategy achieved higher/lower X compared with the baseline.
+Raw or restricted datasets should not be committed to the repository unless their licensing and redistribution conditions explicitly permit it.
 
 ---
 
-# 20. Phase 16 — Thesis Writing
+## 14. Scientific Integrity
 
-The thesis should gradually be written during the research rather than postponed until the end.
+The project must follow these principles:
 
-Recommended structure:
-
-## Chapter 1 — Introduction
-
-* Background
-* Problem statement
-* Motivation
-* Research gap
-* Objectives
-* Research questions
-* Contributions
-* Scope
-* Thesis structure
-
-## Chapter 2 — Literature Review
-
-Cover:
-
-* Financial Sentiment Analysis
-* NLP in finance
-* BERT/transformers
-* BERTweet
-* RoBERTa
-* FinBERT
-* Sentiment-based trading
-* Algorithmic trading
-* Reinforcement Learning
-* RL for financial trading
-* Risk-aware trading
-* Relevant recent studies
-
-## Chapter 3 — Methodology
-
-Describe:
-
-* Dataset
-* Preprocessing
-* Sentiment models
-* Feature engineering
-* Baseline strategy
-* RL formulation
-* State
-* Action
-* Reward
-* Environment
-* Training
-* Validation
-* Testing
-* Evaluation metrics
-
-## Chapter 4 — Experiments and Results
-
-Include:
-
-* Baseline reproduction
-* Experimental setup
-* RL experiments
-* Ablation studies
-* Performance comparison
-* Statistical/robustness analysis
-
-## Chapter 5 — Discussion
-
-Discuss:
-
-* Findings
-* Interpretation
-* Comparison with prior work
-* Practical implications
-* Limitations
-* Threats to validity
-
-## Chapter 6 — Conclusion and Future Work
-
-Include:
-
-* Summary
-* Contributions
-* Main findings
-* Limitations
-* Future research
+* Do not fabricate results, datasets, citations, or experimental findings.
+* Do not claim improvement before experiments demonstrate it.
+* Distinguish documented facts from interpretation and proposed methodology.
+* Report negative or inconclusive results when they occur.
+* Explicitly document methodological deviations from the base paper.
+* Investigate discrepancies between reproduced and published results.
+* Treat data leakage and look-ahead bias as critical threats to validity.
+* Prefer a technically justified and reproducible solution over unnecessary methodological complexity.
 
 ---
 
-# 21. Phase 17 — Proposal
+## 15. Scope Control
 
-The proposal should be written after the base paper has been deeply understood but before excessive implementation.
+The thesis should prioritize:
 
-The proposal should contain:
+```text
+One strong research contribution
+        >
+Many superficial model comparisons
+```
 
-* Title
-* Introduction
-* Problem statement
-* Importance
-* Research gap
-* Objectives
-* Research questions
-* Hypotheses where appropriate
-* Methodology
-* Dataset
-* Models
-* Proposed RL extension
-* Evaluation metrics
-* Expected contribution
-* Preliminary references
-* Timeline
+The project should avoid unnecessary expansion into:
 
-Do not fabricate expected results.
+* stock-price prediction as the primary task
+* development of new sentiment models without research justification
+* excessive RL algorithm comparisons
+* unrelated financial datasets
+* unnecessary feature engineering
+* overly complex portfolio optimization
 
-Use phrases such as:
-
-* "will be investigated"
-* "will be evaluated"
-* "the study will examine whether..."
-
-instead of claiming improvement before experimentation.
+The main contribution should remain the learned trading decision layer.
 
 ---
 
-# 22. Phase 18 — Implementation Quality
+## 16. Research Workflow
 
-The thesis code should be structured as a research project rather than a collection of notebooks.
+The planned research workflow is:
 
-Prefer modules such as:
+```text
+1. Paper Analysis
+        ↓
+2. GitHub Reverse Engineering
+        ↓
+3. Dataset Verification
+        ↓
+4. Baseline Reproduction
+        ↓
+5. Research Gap Refinement
+        ↓
+6. RL Formulation
+        ↓
+7. Environment Design
+        ↓
+8. Implementation
+        ↓
+9. Experiments
+        ↓
+10. Analysis
+        ↓
+11. Thesis Writing
+        ↓
+12. Defense Preparation
+```
 
-* data/
-* preprocessing/
-* sentiment/
-* features/
-* trading/
-* environments/
-* rl/
-* evaluation/
-* experiments/
-* configs/
-* notebooks/
-* tests/
-
-Keep:
-
-* configuration separate from code,
-* experiment parameters reproducible,
-* random seeds recorded,
-* outputs versioned,
-* results stored systematically.
-
-Every important experiment should be reproducible from configuration.
-
----
-
-# 23. Phase 19 — Git and Research Tracking
-
-Use Git throughout the project.
-
-Maintain meaningful commits.
-
-Suggested milestones:
-
-* thesis initialization
-* base paper analysis
-* dataset preparation
-* baseline reproduction
-* sentiment pipeline
-* rule-based trading baseline
-* RL environment
-* first RL experiment
-* final experiments
-* thesis results
-* final thesis
-
-Do not commit:
-
-* private credentials
-* huge raw datasets unless permitted
-* API keys
-* personal information
-* unnecessary generated files.
+The proposal phase intentionally uses a smaller scope than the full implementation phase.
 
 ---
 
-# 24. Phase 20 — Final Validation
+## 17. Proposal-Phase Principle
 
-Before writing the final conclusion, perform a complete audit.
+Before proposal approval, the project should establish:
 
-### Scientific audit
+* the research problem
+* the research gap
+* the objectives
+* the research questions
+* the proposed methodology
+* the experimental framework
+* the expected contribution
 
-* Are research questions answered?
-* Is the research gap addressed?
-* Is the contribution clearly defined?
-* Are claims supported by experiments?
-
-### Data audit
-
-* Is the dataset documented?
-* Is there leakage?
-* Are temporal splits correct?
-* Are timestamps handled correctly?
-
-### Code audit
-
-* Can the main experiments be reproduced?
-* Are dependencies documented?
-* Are configurations recorded?
-* Are seeds recorded?
-
-### Results audit
-
-* Are all tables reproducible?
-* Are metrics calculated correctly?
-* Are baselines included?
-* Are negative results reported?
-
-### Thesis audit
-
-* References complete?
-* Figures numbered?
-* Tables numbered?
-* Acronyms defined?
-* Equations consistent?
-* Persian/English terminology consistent?
-* Formatting according to university requirements?
+Full repository reverse engineering, complete baseline reproduction, final RL algorithm selection, and detailed implementation decisions will be performed after proposal approval.
 
 ---
 
-# 25. Phase 21 — Pre-Defense Preparation
+## 18. Decision Management
 
-Prepare:
+Major methodological decisions should be recorded in:
 
-1. Final thesis
-2. Presentation
-3. Executive summary
-4. Research contribution summary
-5. Methodology diagram
-6. System architecture diagram
-7. Experimental pipeline diagram
-8. Dataset description
-9. Baseline comparison
-10. Main results
-11. Ablation results
-12. Limitations
-13. Future work
+```text
+docs/decision_log.md
+```
 
-Prepare answers to likely questions:
+Each decision should document, where applicable:
 
-* Why this problem?
-* Why sentiment analysis?
-* Why social media?
-* Why these models?
-* Why FinBERT/BERTweet/RoBERTa?
-* Why reinforcement learning?
-* Why this RL algorithm?
-* Why this state?
-* Why this action space?
-* Why this reward?
-* How was leakage prevented?
-* Why these metrics?
-* Why not ordinary supervised learning?
-* Why not another RL method?
-* What is the actual contribution?
-* What are the limitations?
-* Can the experiment be reproduced?
+* Decision
+* Reason
+* Alternatives considered
+* Consequences
+* Status
+
+Decisions that have not yet been experimentally validated should remain explicitly marked as provisional.
 
 ---
 
-# 26. Phase 22 — Final Defense
+## 19. Current Project Phase
 
-The defense preparation should focus on explaining the thesis as a logical chain:
+The current project phase is:
 
-**Problem → Gap → Base Paper → Limitation/Opportunity → Proposed Extension → Method → Experiments → Results → Contribution → Limitations**
+**Proposal Preparation**
 
-The presentation must not become a generic explanation of AI, NLP, or reinforcement learning.
+Current priority:
 
-The majority of the presentation should demonstrate:
+```text
+Methodology
+→ Proposal
+→ Proposal Review / Defense
+```
 
-* what was done,
-* why it was done,
-* how it was evaluated,
-* what was found.
+After proposal approval:
 
----
-
-# 27. Final Deliverables
-
-The project is considered complete only when all of the following exist:
-
-* Approved thesis proposal
-* Literature review
-* Reproducible dataset pipeline
-* Reproduced baseline
-* Original paper's trading strategy implementation
-* RL trading environment
-* Proposed RL model
-* Experimental results
-* Ablation/robustness analysis
-* Final thesis
-* Source code
-* Reproducibility documentation
-* Final presentation
-* Defense preparation
+```text
+Reverse Engineering
+→ Dataset Verification
+→ Baseline Reproduction
+→ RL Design
+→ Implementation
+→ Experiments
+```
 
 ---
 
-# 28. How the Assistant Should Work With the Student
+## 20. Final Principle
 
-For every thesis task:
+The objective of this project is to produce a scientifically defensible, reproducible, and experimentally validated Master's thesis.
 
-1. First identify the exact current phase.
-2. Do not jump ahead unnecessarily.
-3. Use the selected paper and official repository as primary technical references.
-4. Search the web when current or paper-specific verification is necessary.
-5. Prefer original scientific sources over secondary summaries.
-6. When discussing the base paper, distinguish its actual methodology from proposed thesis modifications.
-7. When writing scientific text, avoid unsupported claims.
-8. When proposing experiments, explain what research question each experiment answers.
-9. When reviewing code, prioritize correctness, reproducibility, leakage prevention, and maintainability.
-10. Challenge weak assumptions instead of simply agreeing.
-11. If a proposed idea increases scope without clear thesis value, explicitly point this out.
-12. Prefer one well-designed experiment over many superficial experiments.
-13. Never fabricate experimental numbers, citations, datasets, or results.
-14. Keep a running record of important decisions.
-15. When a major decision is reached, state:
-
-* decision,
-* reason,
-* alternatives rejected,
-* consequence for the next phase.
-
----
-
-# 29. Current Project Status
-
-Current status:
-
-**Base paper: APPROVED AND SELECTED**
-
-Selected paper:
-
-**Financial sentiment analysis meets algorithmic trading: a performance-based approach**
-
-Current intended development:
-
-**Sentiment-based algorithmic trading + Reinforcement Learning**
-
-Supervisor status:
-
-* Candidate paper approved by Dr. Reza Shamsaee.
-* Supervisor considers this paper clearer and more promising than the previously considered paper.
-* Data and code accessibility are important positive factors.
-
-Immediate next tasks:
-
-1. Deeply analyze the selected paper.
-2. Inspect the official GitHub repository.
-3. Inspect and verify the dataset.
-4. Map the complete baseline pipeline.
-5. Identify exactly where the RL extension should be introduced.
-6. Finalize the research questions.
-7. Prepare the thesis proposal.
-8. Only then begin the full implementation.
-
-Do not search for another base paper unless the supervisor explicitly requests it or a serious reproducibility/scientific problem is discovered.
-
----
-
-# 30. Golden Rule
-
-The objective is not simply to "add RL" to an existing paper.
-
-The objective is to build a scientifically defensible thesis in which:
-
-**Financial Sentiment Analysis → Information Representation → Trading Decision → Reinforcement Learning → Risk-Aware Evaluation**
-
-forms one coherent research problem.
-
-Every component must have a clear scientific reason for being there.
+The thesis should demonstrate not merely that an RL trading system can be implemented, but that its design, assumptions, evaluation, and conclusions are supported by appropriate experimental evidence.

@@ -84,7 +84,7 @@ paper/         Base-paper materials
 references/    Bibliography
 ```
 
-# Implementation directories will be added after the proposal and baseline-analysis stages.
+Implementation directories will be added after the proposal and baseline-analysis stages.
 
 ## Project Status
 
@@ -94,14 +94,14 @@ Current phase:
 Completed:
 - Base paper selection
 - Initial technical specification
-- Research gap formulation
+- Initial Research gap formulation
 - Research questions
 - Initial project repository
 
 Next:
 - Methodology design
 - Proposal preparation
-- Full base-paper and repository reverse gineering
+- Full base-paper and repository reverse engineering
 - Dataset verification
 - Baseline reproduction
 

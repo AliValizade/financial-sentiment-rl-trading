@@ -4,6 +4,12 @@
 
 Proposal Preparation
 
+## Current Priority
+
+- Complete methodology design
+- Finalize proposal
+- Submit proposal to supervisor
+
 ## Completed
 
 - Base paper selected
