@@ -21,3 +21,7 @@ Alternatives:
 
 Rejected because:
 They shift the contribution away from trading decision optimization.
+
+Consequence:
+The RL component will be designed as a trading decision layer,
+while the sentiment extraction pipeline remains part of the baseline.

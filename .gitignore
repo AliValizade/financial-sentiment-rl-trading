@@ -1,1 +1,45 @@
+Financial sentiment analysis meets algorithmic trading a performance-based approach.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
 .venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/raw/
+data/processed/
+
+# Models
+models/
+checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Generated results
+outputs/
+results/
+
+# Cache
+.cache/
