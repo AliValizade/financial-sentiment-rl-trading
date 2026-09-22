@@ -86,24 +86,21 @@ references/    Bibliography
 
 Implementation directories will be added after the proposal and baseline-analysis stages.
 
-## Project Status
+## Thesis Status
 
 Current phase:
-- Proposal Preparation
+Proposal Preparation
 
 Completed:
 - Base paper selection
-- Initial technical specification
-- Initial Research gap formulation
-- Research questions
-- Initial project repository
+- Research gap definition
+- Methodology design
+- Proposal draft
 
 Next:
-- Methodology design
-- Proposal preparation
-- Full base-paper and repository reverse engineering
-- Dataset verification
 - Baseline reproduction
+- Dataset verification
+- RL environment implementation
 
 ---
 ###### Author: Ali Valizade

@@ -1,0 +1,7 @@
+- Title
+- Research Area
+- Base Paper
+- Research Gap
+- Proposed Extension
+- Research Questions
+- Evaluation Strategy

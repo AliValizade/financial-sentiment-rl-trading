@@ -1,27 +1,23 @@
-# Thesis Decision Log
+# Decision Log
 
-## Decision 001
-Date:
-2026-09-21
-
-Topic:
-RL Integration Point
-
+## 2026-09-22
 Decision:
-RL will replace the rule-based trading decision layer,
-not the sentiment extraction layer.
+Use Burchi & Regni (2026) as the final base paper.
 
 Reason:
-The base paper already provides sentiment models.
-The research contribution should focus on adaptive trading decisions.
+Provides reproducible sentiment-to-trading pipeline.
 
-Alternatives:
-- Training a new sentiment model
-- Price prediction approach
+Alternative considered:
+Other sentiment analysis papers.
 
-Rejected because:
-They shift the contribution away from trading decision optimization.
+Status:
+Confirmed.
 
-Consequence:
-The RL component will be designed as a trading decision layer,
-while the sentiment extraction pipeline remains part of the baseline.
+---
+
+## 2026-09-22
+Decision:
+Use RL as extension at trading decision layer.
+
+Reason:
+Contribution should focus on decision making, not sentiment classification.
